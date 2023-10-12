@@ -4,10 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.example.jobPosting.aggregate.JobPosting;
 import org.example.jobPosting.store.orm.JobPostingJpo;
 import org.example.jobPosting.store.orm.JobPostingRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -25,6 +28,18 @@ public class JobPostingStore {
         Optional<JobPostingJpo> jpo = this.jobPostingRepository.findById(jobPostingId);
         if(jpo.isEmpty()) throw new NoSuchElementException();
         return jpo.get().toDomain();
+    }
+
+    public List<JobPosting> loadJobPostings() {
+        //
+        List<JobPostingJpo> jpos = this.jobPostingRepository.findAll(Sort.by("officeName"));
+        return jpos.stream().map(JobPostingJpo::toDomain).collect(Collectors.toList());
+    }
+
+    public List<JobPosting> loadJobPostings(String search) {
+        //
+        List<JobPostingJpo> jpos = this.jobPostingRepository.findAllByOfficeNameContainsOrPositionContainsOrderByOfficeName(search,search);
+        return jpos.stream().map(JobPostingJpo::toDomain).collect(Collectors.toList());
     }
 
     public void update(JobPosting jobPosting) {

@@ -10,6 +10,7 @@ import org.example.office.service.OfficeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -34,6 +35,16 @@ public class JobPostingService {
         this.jobPostingStore.create(jobPosting);
 
         return jobPosting.getId();
+    }
+
+    public List<JobPosting> loadJobPostings(String search) {
+        List<JobPosting> result = null;
+        if("".equals(search)) {
+            result = this.jobPostingStore.loadJobPostings();
+        }else {
+            result = this.jobPostingStore.loadJobPostings(search);
+        }
+        return result;
     }
 
     public void update(String jobPostingId, UpdateJobPosting command) {
