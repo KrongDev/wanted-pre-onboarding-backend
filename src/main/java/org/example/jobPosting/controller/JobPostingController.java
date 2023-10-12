@@ -2,10 +2,9 @@ package org.example.jobPosting.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.jobPosting.command.CreateJobPosting;
+import org.example.jobPosting.command.UpdateJobPosting;
 import org.example.jobPosting.service.JobPostingService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/job-posting")
@@ -15,8 +14,14 @@ public class JobPostingController {
     private final JobPostingService jobPostingService;
 
     @PostMapping
-    public String create(CreateJobPosting command) {
+    public String create(@RequestBody CreateJobPosting command) {
         //
         return this.jobPostingService.create(command);
+    }
+
+    @PutMapping
+    public void update(@RequestParam String jobPostingId, @RequestBody UpdateJobPosting command) {
+        //
+        this.jobPostingService.update(jobPostingId, command);
     }
 }

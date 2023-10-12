@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.jobPosting.command.CreateJobPosting;
+import org.example.jobPosting.command.UpdateJobPosting;
 import org.springframework.beans.BeanUtils;
 
 @Getter
@@ -32,5 +33,13 @@ public class JobPosting {
     public JobPosting (CreateJobPosting command) {
         //
         BeanUtils.copyProperties(command, this);
+    }
+
+    public void update(UpdateJobPosting command) {
+        //
+        this.position = command.getPosition();
+        this.compensation = command.getCompensation();
+        this.content = command.getContent();
+        this.skill = command.getSkill();
     }
 }

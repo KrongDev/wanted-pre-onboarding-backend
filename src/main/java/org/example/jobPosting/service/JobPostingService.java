@@ -3,6 +3,7 @@ package org.example.jobPosting.service;
 import lombok.RequiredArgsConstructor;
 import org.example.jobPosting.aggregate.JobPosting;
 import org.example.jobPosting.command.CreateJobPosting;
+import org.example.jobPosting.command.UpdateJobPosting;
 import org.example.jobPosting.store.JobPostingStore;
 import org.example.office.aggregate.Office;
 import org.example.office.service.OfficeService;
@@ -31,5 +32,13 @@ public class JobPostingService {
         this.jobPostingStore.create(jobPosting);
 
         return jobPosting.getId();
+    }
+
+    public void update(String jobPostingId, UpdateJobPosting command) {
+        //
+        JobPosting jobPosting = this.jobPostingStore.loadJobPosting(jobPostingId);
+        jobPosting.update(command);
+
+        this.jobPostingStore.update(jobPosting);
     }
 }
