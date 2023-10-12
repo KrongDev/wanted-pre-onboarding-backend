@@ -1,16 +1,16 @@
-package org.example.jobPosting.aggregate;
+package org.example.jobPost.aggregate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.example.jobPosting.command.CreateJobPosting;
-import org.example.jobPosting.command.UpdateJobPosting;
+import org.example.jobPost.command.CreateJobPost;
+import org.example.jobPost.command.UpdateJobPost;
 import org.springframework.beans.BeanUtils;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class JobPosting {
+public class JobPost {
     //
     private String id;
 
@@ -24,18 +24,18 @@ public class JobPosting {
     private String content;
     private String skill;
 
-    public JobPosting() {
+    public JobPost() {
         this.officeName = "";
         this.nation = "";
         this.region = "";
     }
 
-    public JobPosting (CreateJobPosting command) {
+    public JobPost(CreateJobPost command) {
         //
         BeanUtils.copyProperties(command, this);
     }
 
-    public void update(UpdateJobPosting command) {
+    public void update(UpdateJobPost command) {
         //
         this.position = command.getPosition();
         this.compensation = command.getCompensation();

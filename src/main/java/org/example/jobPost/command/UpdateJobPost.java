@@ -1,4 +1,4 @@
-package org.example.jobPosting.command;
+package org.example.jobPost.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateJobPosting {
+public class UpdateJobPost {
     //
     private String position;
     private int compensation;

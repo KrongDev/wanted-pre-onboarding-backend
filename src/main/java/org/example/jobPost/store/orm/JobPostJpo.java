@@ -1,10 +1,10 @@
-package org.example.jobPosting.store.orm;
+package org.example.jobPost.store.orm;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.jobPosting.aggregate.JobPosting;
+import org.example.jobPost.aggregate.JobPost;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.Entity;
@@ -16,8 +16,8 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="tb_job_posting")
-public class JobPostingJpo {
+@Table(name="tb_job_post")
+public class JobPostJpo {
     //
     @Id
     private String id;
@@ -33,13 +33,13 @@ public class JobPostingJpo {
     private String content;
     private String skill;
 
-    public JobPostingJpo (JobPosting jobPosting) {
-        BeanUtils.copyProperties(jobPosting, this);
+    public JobPostJpo(JobPost jobPost) {
+        BeanUtils.copyProperties(jobPost, this);
     }
 
-    public JobPosting toDomain() {
-        JobPosting jobPosting = new JobPosting();
-        BeanUtils.copyProperties(this, jobPosting);
-        return jobPosting;
+    public JobPost toDomain() {
+        JobPost jobPost = new JobPost();
+        BeanUtils.copyProperties(this, jobPost);
+        return jobPost;
     }
 }

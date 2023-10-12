@@ -1,4 +1,4 @@
-package org.example.jobPosting.command;
+package org.example.jobPost.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateJobPosting {
+public class CreateJobPost {
     //
     transient private String id;
     private String officeId;
