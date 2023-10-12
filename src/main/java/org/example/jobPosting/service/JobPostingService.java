@@ -8,10 +8,12 @@ import org.example.jobPosting.store.JobPostingStore;
 import org.example.office.aggregate.Office;
 import org.example.office.service.OfficeService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class JobPostingService {
     //
