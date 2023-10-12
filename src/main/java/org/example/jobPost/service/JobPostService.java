@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -44,13 +45,13 @@ public class JobPostService {
         //
         JobPost jobPost = this.jobPostStore.loadJobPost(jobPostId);
         OfficePostMap officePostMap = this.officePostMapService.loadOfficePostMap(jobPost.getOfficeId());
-        jobPost.setOfficePostIds(officePostMap.getJobPostIds());
+        jobPost.setOfficePostIds(officePostMap.getJobPostIds().stream().filter(id->!jobPost.getId().equals(id)).collect(Collectors.toList()));
 
         return jobPost;
     }
 
     public List<JobPost> loadJobPosts(String search) {
-        List<JobPost> result = null;
+        List<JobPost> result;
         if("".equals(search)) {
             result = this.jobPostStore.loadJobPosts();
         }else {
