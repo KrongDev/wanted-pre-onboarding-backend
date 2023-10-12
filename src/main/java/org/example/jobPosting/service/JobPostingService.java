@@ -41,4 +41,9 @@ public class JobPostingService {
 
         this.jobPostingStore.update(jobPosting);
     }
+
+    public void delete(String jobPostingId) {
+        //
+        this.jobPostingStore.delete(jobPostingId);
+    }
 }

@@ -19,9 +19,15 @@ public class JobPostingController {
         return this.jobPostingService.create(command);
     }
 
-    @PutMapping
-    public void update(@RequestParam String jobPostingId, @RequestBody UpdateJobPosting command) {
+    @PutMapping("/{jobPostingId}")
+    public void update(@PathVariable String jobPostingId, @RequestBody UpdateJobPosting command) {
         //
         this.jobPostingService.update(jobPostingId, command);
+    }
+
+    @DeleteMapping("/{jobPostingId}")
+    public void delete(@PathVariable String jobPostingId) {
+        //
+        this.jobPostingService.delete(jobPostingId);
     }
 }

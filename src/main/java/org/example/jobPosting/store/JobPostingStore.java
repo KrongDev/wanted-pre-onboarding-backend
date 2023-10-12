@@ -31,4 +31,9 @@ public class JobPostingStore {
         //
         this.jobPostingRepository.save(new JobPostingJpo(jobPosting));
     }
+
+    public void delete(String jobPostingId) {
+        //
+        this.jobPostingRepository.deleteById(jobPostingId);
+    }
 }
