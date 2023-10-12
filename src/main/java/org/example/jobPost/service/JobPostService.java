@@ -20,6 +20,7 @@ public class JobPostService {
     //
     private final JobPostStore jobPostStore;
     private final OfficeService officeService;
+    private final OfficePostMapService officePostMapService;
 
     public String create(CreateJobPost command) {
         Office office = this.officeService.loadOffice(command.getOfficeId());
@@ -33,6 +34,7 @@ public class JobPostService {
         jobPost.setRegion(office.getRegion());
 
         this.jobPostStore.create(jobPost);
+        this.officePostMapService.addJobPost(jobPost.getOfficeId(), jobPost.getId());
 
         return jobPost.getId();
     }
@@ -63,6 +65,9 @@ public class JobPostService {
 
     public void delete(String jobPostId) {
         //
-        this.jobPostStore.delete(jobPostId);
+        JobPost jobPost = this.jobPostStore.loadJobPost(jobPostId);
+        this.jobPostStore.delete(jobPost.getId());
+        this.officePostMapService.removeJobPost(jobPost.getOfficeId(), jobPost.getId());
+
     }
 }
