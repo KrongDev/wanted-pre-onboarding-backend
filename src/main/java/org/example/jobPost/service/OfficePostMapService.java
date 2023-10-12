@@ -32,4 +32,9 @@ public class OfficePostMapService {
         officePostMap.remove(jobPostId);
         this.officePostMapStore.update(officePostMap);
     }
+
+    public OfficePostMap loadOfficePostMap(String officeId) {
+        //
+        return this.officePostMapStore.loadOfficePostMap(officeId);
+    }
 }

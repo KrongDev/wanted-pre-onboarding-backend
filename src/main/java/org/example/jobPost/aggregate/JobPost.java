@@ -7,6 +7,9 @@ import org.example.jobPost.command.CreateJobPost;
 import org.example.jobPost.command.UpdateJobPost;
 import org.springframework.beans.BeanUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,10 +27,13 @@ public class JobPost {
     private String content;
     private String skill;
 
+    private List<String> officePostIds;
+
     public JobPost() {
         this.officeName = "";
         this.nation = "";
         this.region = "";
+        this.officePostIds = new ArrayList<>();
     }
 
     public JobPost(CreateJobPost command) {

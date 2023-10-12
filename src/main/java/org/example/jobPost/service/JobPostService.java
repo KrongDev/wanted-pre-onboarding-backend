@@ -2,6 +2,7 @@ package org.example.jobPost.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.jobPost.aggregate.JobPost;
+import org.example.jobPost.aggregate.OfficePostMap;
 import org.example.jobPost.command.CreateJobPost;
 import org.example.jobPost.command.UpdateJobPost;
 import org.example.jobPost.store.JobPostStore;
@@ -42,10 +43,13 @@ public class JobPostService {
     public JobPost loadjobPost(String jobPostId) {
         //
         JobPost jobPost = this.jobPostStore.loadJobPost(jobPostId);
+        OfficePostMap officePostMap = this.officePostMapService.loadOfficePostMap(jobPost.getOfficeId());
+        jobPost.setOfficePostIds(officePostMap.getJobPostIds());
+
         return jobPost;
     }
 
-    public List<JobPost> loadjobPosts(String search) {
+    public List<JobPost> loadJobPosts(String search) {
         List<JobPost> result = null;
         if("".equals(search)) {
             result = this.jobPostStore.loadJobPosts();

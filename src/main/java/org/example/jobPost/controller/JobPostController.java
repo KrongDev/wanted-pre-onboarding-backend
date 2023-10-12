@@ -23,17 +23,17 @@ public class JobPostController {
     }
 
     @GetMapping("/{jobPostId}")
-    public JobPost loadjobPost(@PathVariable String jobPostId) {
+    public JobPost loadJobPost(@PathVariable String jobPostId) {
         //
         return this.jobPostService.loadjobPost(jobPostId);
     }
 
     @GetMapping
-    public List<JobPost> loadjobPosts(
+    public List<JobPost> loadJobPosts(
             @RequestParam(defaultValue = "") String search
     ) {
         //
-        return this.jobPostService.loadjobPosts(search);
+        return this.jobPostService.loadJobPosts(search);
     }
 
     @PutMapping("/{jobPostId}")
