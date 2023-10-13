@@ -3,6 +3,7 @@ package org.example.jobPost.service;
 import lombok.RequiredArgsConstructor;
 import org.example.jobPost.aggregate.JobPost;
 import org.example.jobPost.aggregate.OfficePostMap;
+import org.example.jobPost.command.ApplyJobPost;
 import org.example.jobPost.command.CreateJobPost;
 import org.example.jobPost.command.UpdateJobPost;
 import org.example.jobPost.store.JobPostStore;
@@ -11,6 +12,7 @@ import org.example.office.service.OfficeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.rmi.AlreadyBoundException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -23,6 +25,7 @@ public class JobPostService {
     private final JobPostStore jobPostStore;
     private final OfficeService officeService;
     private final OfficePostMapService officePostMapService;
+    private final PostUserService postUserService;
 
     public String create(CreateJobPost command) {
         Office office = this.officeService.loadOffice(command.getOfficeId());
@@ -39,6 +42,11 @@ public class JobPostService {
         this.officePostMapService.addJobPost(jobPost.getOfficeId(), jobPost.getId());
 
         return jobPost.getId();
+    }
+
+    public void applyJobPost(ApplyJobPost command) throws AlreadyBoundException {
+        //
+        this.postUserService.create(command.getJobPostId(), command.getUserId());
     }
 
     public JobPost loadjobPost(String jobPostId) {
